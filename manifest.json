@@ -28,5 +28,5 @@
     }
   ],
   
-  "permissions": [ "contextMenus", "storage" ]
+  "permissions": [ "contextMenus", "storage", "webNavigation" ]
 }

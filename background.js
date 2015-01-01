@@ -45,3 +45,17 @@ function newQuoteClickHandler(info, tab) {
 		);
 	}
 }
+
+
+//TODO move to constants.js
+String.prototype.endsWith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+
+// Browser event triggers ================================================================
+chrome.webNavigation.onCommitted.addListener(function(e) {
+	var isPdf = e.url.toLowerCase().endsWith('.pdf');
+	if (isPdf) {
+		console.info('Should open link as PDF.');
+	}
+});
