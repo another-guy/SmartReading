@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+
+  "name": "SmartReading",
+  "version": "0.1",
+
+  "default_locale": "en",
+  "description": "SmartReading helps writing summaries on books, taking notes and keeping quotes. It also lets you save words you want to add into your active vocabulary.",
+  "icons": {
+	"16": "pencil-icon-16.png",
+    "48": "pencil-icon-48.png",
+    "128": "pencil-icon-128.png"
+  },
+  
+  "author": "Igor Soloydenko",
+  
+  "background" : {
+	"scripts": [ "constants.js", "background.js" ]
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": [ ],
+      "js": ["lib/jquery-2.1.3.min.js",
+	         "constants.js", "content.js"],
+	  "run_at": "document_idle"
+    }
+  ],
+  
+  "permissions": [ "contextMenus", "storage" ]
+}

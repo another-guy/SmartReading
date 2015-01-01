@@ -1,0 +1,10 @@
+{
+	"newWordOrPhrase" : {
+		"message": "New word or phrase",
+		"description": ""
+	},
+	"newQuote" : {
+		"message": "New quote",
+		"description": ""
+	}
+}
