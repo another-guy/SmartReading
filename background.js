@@ -1,8 +1,8 @@
 var newWordOrPhraseItemAdded = false;
 var newQuoteItemAdded = false;
 
-function onRequest(request, sender, callback) {
-	var action = request.action;
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+	var action = message.action;
 	if (action == createNewWordOrPhraseContextMenuItemRequest) {
 		if (newWordOrPhraseItemAdded) return;
 		newWordOrPhraseItemAdded = true;
@@ -14,7 +14,7 @@ function onRequest(request, sender, callback) {
 	} else {
 		alert("Action not supported: " + action);
 	}
-}
+});
 
 function createContextItem(title, handler) {
 	var contextItemProperties = {
@@ -24,10 +24,6 @@ function createContextItem(title, handler) {
 	};
 	chrome.contextMenus.create(contextItemProperties);
 }
-
-// Subscribe on request from summarize-it.js:
-chrome.extension.onRequest.addListener(onRequest);
-
 
 // App business logic ====================================================================
 

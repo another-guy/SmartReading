@@ -11,8 +11,8 @@ function getSelectedText() {
 }
 
 // Ask background script to create contextMenu item
-chrome.extension.sendRequest({ "action": createNewWordOrPhraseContextMenuItemRequest });
-chrome.extension.sendRequest({ "action": createNewQuoteContextMenuItemRequest });
+chrome.runtime.sendMessage({ "action": createNewWordOrPhraseContextMenuItemRequest });
+chrome.runtime.sendMessage({ "action": createNewQuoteContextMenuItemRequest });
 
 // Listen for contextMenu item's messages
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
