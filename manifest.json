@@ -22,11 +22,11 @@
     {
       "matches": ["<all_urls>"],
       "css": [ ],
-      "js": ["lib/jquery-2.1.3.min.js",
+      "js": ["lib/jquery-2.1.3.min.js", "lib/pdf.js", "lib/pdf.worker.js",
 	         "constants.js", "content.js"],
 	  "run_at": "document_idle"
     }
   ],
   
-  "permissions": [ "contextMenus", "storage", "webNavigation" ]
+  "permissions": [ "contextMenus", "storage", "webNavigation", "tabs" ]
 }

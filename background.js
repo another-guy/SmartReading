@@ -48,14 +48,26 @@ function newQuoteClickHandler(info, tab) {
 
 
 //TODO move to constants.js
-String.prototype.endsWith = function(suffix) {
-    return this.indexOf(suffix, this.length - suffix.length) !== -1;
-};
 
 // Browser event triggers ================================================================
+function doInCurrentTab(tabCallback) {
+	chrome.tabs.query(
+		{ currentWindow: true, active: true },
+		function (tabArray) { tabCallback(tabArray[0]); }
+	);
+}
+
 chrome.webNavigation.onCommitted.addListener(function(e) {
-	var isPdf = e.url.toLowerCase().endsWith('.pdf');
+	var navigationUrl = e.url;
+	var isPdf = navigationUrl.toLowerCase().endsWith('.pdf');
 	if (isPdf) {
-		console.info('Should open link as PDF.');
+		alert('Should open link as PDF.');		
+		doInCurrentTab(
+			function(tab) {
+				alert('tab = ' + tab + ' -> ' + navigationUrl);
+				// chrome.tabs.update(tab.id, {url: 'http://www.ya.ru'});
+				// TODO show view with URL passed
+			}
+		);
 	}
 });
