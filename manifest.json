@@ -28,5 +28,7 @@
     }
   ],
   
-  "permissions": [ "contextMenus", "storage", "webNavigation", "tabs" ]
+  "web_accessible_resources": [ "smartReadingPdfViewer.html" ],
+  
+  "permissions": [ "contextMenus", "storage", "webNavigation", "tabs", "webRequest", "webRequestBlocking", "*://*/*.pdf", "<all_urls>" ]
 }

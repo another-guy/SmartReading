@@ -14,6 +14,8 @@ function getSelectedText() {
 chrome.runtime.sendMessage({ "action": createNewWordOrPhraseContextMenuItemRequest });
 chrome.runtime.sendMessage({ "action": createNewQuoteContextMenuItemRequest });
 
+console.log('test');
+
 // Listen for contextMenu item's messages
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 	var actionType = request.actionType;
@@ -24,6 +26,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 		alert("New quote: " + getSelectedText());
 		sendResponse({ "selectedText": getSelectedText()});
 	} else {
-		alert("Action type unknown: " + actionType);
+		alert("Action type unknown or not found in " + request);
 	}
 });
+

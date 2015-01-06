@@ -46,28 +46,20 @@ function newQuoteClickHandler(info, tab) {
 	}
 }
 
-
-//TODO move to constants.js
-
 // Browser event triggers ================================================================
-function doInCurrentTab(tabCallback) {
-	chrome.tabs.query(
-		{ currentWindow: true, active: true },
-		function (tabArray) { tabCallback(tabArray[0]); }
-	);
-}
-
-chrome.webNavigation.onCommitted.addListener(function(e) {
-	var navigationUrl = e.url;
-	var isPdf = navigationUrl.toLowerCase().endsWith('.pdf');
-	if (isPdf) {
-		alert('Should open link as PDF.');		
-		doInCurrentTab(
-			function(tab) {
-				alert('tab = ' + tab + ' -> ' + navigationUrl);
-				// chrome.tabs.update(tab.id, {url: 'http://www.ya.ru'});
-				// TODO show view with URL passed
-			}
-		);
-	}
-});
+chrome.webRequest.onBeforeRequest.addListener(
+	function (details) {
+		var navigationUrl = details.url;
+		var isPdf = navigationUrl.toLowerCase().endsWith('.pdf');
+		if (!isPdf) {
+			log('Is NOT a pdf'); // TODO add log function
+			return;
+		} else {
+			var displayURL = chrome.extension.getURL('smartReadingPdfViewer.html') + '?file=' + encodeURIComponent(navigationUrl);
+			alert('IS PDF -> redirect to ' + displayURL + '\n\nFrom: ' + navigationUrl);
+			return {redirectUrl: displayURL};
+		}
+	},
+	{urls: [ '*://*/*.pdf', 'file:///*' ]},
+	['blocking']
+);
