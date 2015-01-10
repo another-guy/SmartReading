@@ -3,6 +3,10 @@
 function localizeUI() {
 	$('#newWordOrPhrase').text(chrome.i18n.getMessage("newWordOrPhrase"));
 	$('#newQuote').text(chrome.i18n.getMessage("newQuote"));
+	$('#comment').text(chrome.i18n.getMessage("comment"));
+	$('#notaBene').text(chrome.i18n.getMessage("notaBene"));
+	$('#help').text(chrome.i18n.getMessage("help"));
+	$('#close').text(chrome.i18n.getMessage("close"));
 }
 
 function getPdfUrl() {
@@ -24,7 +28,6 @@ function loadAndRenderPdf(pdfUrl) {
 	var canvas = document.getElementById('pdfViewerCanvas');
 	var context = canvas.getContext('2d');
 
-	alert(pdfUrl);
 	PDFJS.getDocument(pdfUrl).then(function(pdf) {
 	//PDFJS.getDocument('helloworld.pdf').then(function(pdf) {
 	  // Using promise to fetch the page

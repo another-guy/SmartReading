@@ -6,5 +6,21 @@
 	"newQuote" : {
 		"message": "New quote",
 		"description": ""
+	},
+	"comment" : {
+		"message": "Comment",
+		"description": ""
+	},
+	"notaBene" : {
+		"message": "N.B.!",
+		"description": ""
+	},
+	"help" : {
+		"message": "Help",
+		"description": ""
+	},
+	"close" : {
+		"message": "Close",
+		"description": ""
 	}
 }

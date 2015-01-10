@@ -2,4 +2,6 @@
 [ ] Remote PDF rendering
 [ ] Sending REST requests to the Service
 [ ] Menu
+[ ] Add a separate page for used JS libraries
 [?] Text-to-speech
+[?] Simple access to default PDF viewer
