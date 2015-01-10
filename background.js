@@ -1,3 +1,5 @@
+'use strict';
+
 var newWordOrPhraseItemAdded = false;
 var newQuoteItemAdded = false;
 
@@ -52,11 +54,11 @@ chrome.webRequest.onBeforeRequest.addListener(
 		var navigationUrl = details.url;
 		var isPdf = navigationUrl.toLowerCase().endsWith('.pdf');
 		if (!isPdf) {
-			log('Is NOT a pdf'); // TODO add log function
+			// log('Is NOT a pdf'); // TODO add log function
 			return;
 		} else {
 			var displayURL = chrome.extension.getURL('smartReadingPdfViewer.html') + '?file=' + encodeURIComponent(navigationUrl);
-			alert('IS PDF -> redirect to ' + displayURL + '\n\nFrom: ' + navigationUrl);
+			// alert('IS PDF -> redirect to ' + displayURL + '\n\nFrom: ' + navigationUrl);
 			return {redirectUrl: displayURL};
 		}
 	},

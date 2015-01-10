@@ -1,3 +1,5 @@
+'use strict';
+
 console.warn(extensionInfo.progName + " successfully loaded.");
 
 function getSelectedText() {
