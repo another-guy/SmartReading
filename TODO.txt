@@ -1,1 +1,5 @@
+[ ] Local PDF rendering
+[ ] Remote PDF rendering
+[ ] Sending REST requests to the Service
+[ ] Menu
 [?] Text-to-speech
