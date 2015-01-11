@@ -1,20 +1,21 @@
 'use strict';
 
-function localizeUI() {
-	$('#newWordOrPhrase').text(chrome.i18n.getMessage("newWordOrPhrase"));
-	$('#newQuote').text(chrome.i18n.getMessage("newQuote"));
-	$('#comment').text(chrome.i18n.getMessage("comment"));
-	$('#notaBene').text(chrome.i18n.getMessage("notaBene"));
-	$('#help').text(chrome.i18n.getMessage("help"));
-	$('#close').text(chrome.i18n.getMessage("close"));
+function initializeSemanticUi() {
+	console.log('SmartReading: initializeSemanticUi()');
+	
+	$('.ui.dropdown').dropdown();
 }
 
 function getPdfUrl() {
+	console.log('SmartReading: getPdfUrl()');
+	
 	var pdfUrl = decodeURIComponent(location.href.split('/smartReadingPdfViewer.html?file=')[1]);
 	console.log('Detected PDF url: ' + pdfUrl);
 	return pdfUrl;
 }
 function setTitleFromUrl(url) {
+	console.log('SmartReading: setTitleFromUrl()');
+	
 	var parts = url.split('/');
 	var newTitle = "Reading " + parts[parts.length - 1];
 	console.log('Set title: ' + newTitle);
@@ -22,17 +23,17 @@ function setTitleFromUrl(url) {
 }
 
 function loadAndRenderPdf(pdfUrl) {
-	'use strict';
-
+	console.log('SmartReading: loadAndRenderPdf()');
+	
 	// TODO Fetch the document to render from pdfUrl
 	var canvas = document.getElementById('pdfViewerCanvas');
 	var context = canvas.getContext('2d');
 
-	PDFJS.getDocument(pdfUrl).then(function(pdf) {
-	//PDFJS.getDocument('helloworld.pdf').then(function(pdf) {
+	//PDFJS.getDocument(pdfUrl).then(function(pdf) {
+	PDFJS.getDocument('helloworld.pdf').then(function(pdf) {
 	  // Using promise to fetch the page
 	  pdf.getPage(1).then(function(page) {
-		var scale = 1.5;
+		var scale = 2.5;
 		var viewport = page.getViewport(scale);
 
 		canvas.height = viewport.height;
@@ -48,9 +49,9 @@ function loadAndRenderPdf(pdfUrl) {
 }
 
 $(function() {
-	console.log('Page loaded...');
+	console.log('SmartReading: Page loaded...');
 	
-	localizeUI();
+	initializeSemanticUi();
 	
 	var pdfUrl = getPdfUrl();
 	setTitleFromUrl(pdfUrl);
