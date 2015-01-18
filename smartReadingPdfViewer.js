@@ -24,17 +24,17 @@ function setTitleFromUrl(url) {
 
 function loadAndRenderPdf(pdfUrl) {
 	console.log('SmartReading: loadAndRenderPdf()');
-	
-	// TODO Fetch the document to render from pdfUrl
+
 	var canvas = document.getElementById('pdfViewerCanvas');
 	var context = canvas.getContext('2d');
-
-	//PDFJS.getDocument(pdfUrl).then(function(pdf) {
-	PDFJS.getDocument('helloworld.pdf').then(function(pdf) {
+	PDFJS.disableWorker = false;
+	PDFJS.workerSrc = 'lib/pdf.worker.js';
+	PDFJS.getDocument(pdfUrl).then(function(pdf) {
 	  // Using promise to fetch the page
 	  pdf.getPage(1).then(function(page) {
-		var scale = 2.5;
+		var scale = 1.5;
 		var viewport = page.getViewport(scale);
+		//var viewport = page.getViewport(canvas.width / page.getViewport(1.0).width);
 
 		canvas.height = viewport.height;
 		canvas.width = viewport.width;
@@ -58,5 +58,5 @@ $(function() {
 
 	loadAndRenderPdf(pdfUrl);
 	
-	$("#pdfViewerContainer").css("border", "1px solid black");
+	//$("#pdfViewerContainer").css("border", "1px solid black");
 });
