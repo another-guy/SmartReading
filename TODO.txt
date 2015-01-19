@@ -1,23 +1,26 @@
 BUGS
+[ ] 
+
+PENDING FIX VERIFICATIONS
 [ ] Not all the docs correctly fit to width on load
 
 TODO
-[ ] Text selection/copy
-[ ] Implement rendering page queue
-[ ] Remember last read page
-[ ] +/-, page ABC/XYZ, < >
+[ ] Implement rendering page queue (optimisation)
+[ ] Remember last read page (use local storage)
+[ ] Zoom +/-
 [ ] Sending REST requests to the Service
-[ ] Add a separate page for used JS libraries
+[ ] Add a separate page for used JS libraries (as for MIT license attribution requirement).
 [ ] Add text search functionality
-
 [ ] Password checking
 [ ] Document info/stats
 [?] Text-to-speech
-[?] Simple access to default PDF viewer
+[?] Simple switch to default browser's PDF viewer
 
 IN PROGRESS
+[ ] Text selection & copy
 
 DONE
+[V] page ABC/XYZ, < >
 [V] Local PDF rendering
 [V] Remote PDF rendering
 [V] Menu bar
