@@ -1,5 +1,10 @@
 'use strict';
 
+var pdf = null;
+var canvas = null;
+var context = null;
+var currentPageNumber = 1;
+
 function log(text) { console.log('SmartReading: ' + text); }
 
 function initializeSemanticUi() {
@@ -11,10 +16,30 @@ function initializeSemanticUi() {
 function initializeMenu() {
 	$('#wordOrPhraseButton').click(function (event) { });
 	$('#grammarExampleButton').click(function (event) { });
+
 	$('#quoteButton').click(function (event) { });
 	$('#notaBeneButton').click(function (event) { });
 	$('#commentButton').click(function (event) { });
+
+	$('#fitWidthButton').click(function (event) { });
+	$('#zoomInButton').click(function (event) { });
+	$('#zoomOutButton').click(function (event) { });
+
+	$('#previousButton').click(function (event) {
+		if (currentPageNumber > 1) {
+			currentPageNumber--;
+			renderPage(currentPageNumber);
+		}
+	});
+	$('#nextButton').click(function (event) {
+		if (currentPageNumber < pdf.pdfInfo.numPages) {
+			currentPageNumber++;
+			renderPage(currentPageNumber);
+		}
+	});
+
 	$('#helpButton').click(function (event) { });
+	$('#feedbackButton').click(function (event) { });
 	$('#aboutButton').click(function (event) { });
 	$('#closeButton').click(function (event) { });
 }
@@ -38,13 +63,21 @@ function setTitleFromUrl(url) {
 function loadAndRenderPdf(pdfUrl) {
 	log('loadAndRenderPdf()');
 
-	var canvas = document.getElementById('pdfViewerCanvas');
-	var context = canvas.getContext('2d');
+	canvas = document.getElementById('pdfViewerCanvas');
+	context = canvas.getContext('2d');
 	PDFJS.disableWorker = false;
 	PDFJS.workerSrc = 'lib/pdf.worker.js';
-	PDFJS.getDocument(pdfUrl).then(function(pdf) {
-	  // Using promise to fetch the page
-	  pdf.getPage(1).then(function(page) {
+	PDFJS.getDocument(pdfUrl).then(function(loadedPdf) {
+		pdf = loadedPdf;
+		renderPage(currentPageNumber);
+	});
+}
+
+// EXAMPLE FROM http://mozilla.github.io/pdf.js/examples/learning/prevnext.html
+function renderPage(pageNumber) {
+	pdf.getPage(pageNumber).then(function(page) {
+		$('#pageDiv').text('Page ' + pageNumber + ' of ' + pdf.pdfInfo.numPages);
+	
 		var scale = page.getViewport(1.0).width / canvas.width;
 		var viewport = page.getViewport(scale);
 
@@ -52,11 +85,10 @@ function loadAndRenderPdf(pdfUrl) {
 		canvas.width = viewport.width;
 
 		var renderContext = {
-		  canvasContext: context,
-		  viewport: viewport
+			canvasContext: context,
+			viewport: viewport
 		};
-		page.render(renderContext);
-	  });
+		var renderTask = page.render(renderContext);
 	});
 }
 

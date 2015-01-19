@@ -2,6 +2,7 @@ BUGS
 [ ] Not all the docs correctly fit to width on load
 
 TODO
+[ ] Remember last read page
 [ ] Hot keys
 [ ] +/-, page ABC/XYZ, < >
 [ ] Sending REST requests to the Service
