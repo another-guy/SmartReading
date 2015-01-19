@@ -5,10 +5,13 @@ TODO
 [ ] Text selection/copy
 [ ] Implement rendering page queue
 [ ] Remember last read page
-[ ] Hot keys
 [ ] +/-, page ABC/XYZ, < >
 [ ] Sending REST requests to the Service
 [ ] Add a separate page for used JS libraries
+[ ] Add text search functionality
+
+[ ] Password checking
+[ ] Document info/stats
 [?] Text-to-speech
 [?] Simple access to default PDF viewer
 
@@ -17,4 +20,5 @@ IN PROGRESS
 DONE
 [V] Local PDF rendering
 [V] Remote PDF rendering
-[V] Menu
+[V] Menu bar
+[V] Hot keys support

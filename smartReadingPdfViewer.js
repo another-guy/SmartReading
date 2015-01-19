@@ -13,39 +13,60 @@ function initializeSemanticUi() {
 	$('.ui.dropdown').dropdown();
 }
 
+function wordOrPhraseHandler() {
+	log('wordOrPhraseHandler');
+}
+function grammarExampleHandler() {
+	log('grammarExampleHandler');
+}
+
+function registerButton(buttonSelector, handler, hotkey, hotkeyTextOverride) {
+	$(buttonSelector).click(handler);
+	if (hotkey !== '') {
+		$(document).bind('keydown', hotkey, handler);
+		
+		var hotkeyToShow = hotkey;
+		if (typeof hotkeyTextOverride != 'undefined') {
+			hotkeyToShow = hotkeyTextOverride;
+		}
+		hotkeyToShow = hotkeyToShow == '' ? '' : ' (' + hotkeyToShow + ')';
+		$(buttonSelector).append(hotkeyToShow);
+	}
+}
+
 function initializeMenu() {
-	$('#wordOrPhraseButton').click(function (event) { });
-	$('#grammarExampleButton').click(function (event) { });
+	registerButton('#wordOrPhraseButton', wordOrPhraseHandler, 'Ctrl+A');
+	registerButton('#grammarExampleButton', grammarExampleHandler, 'Ctrl+G');
 
-	$('#quoteButton').click(function (event) { });
-	$('#notaBeneButton').click(function (event) { });
-	$('#commentButton').click(function (event) { });
+	registerButton('#quoteButton', wordOrPhraseHandler, 'Ctrl+Q');
+	registerButton('#notaBeneButton', wordOrPhraseHandler, 'Ctrl+N');
+	registerButton('#commentButton', wordOrPhraseHandler, 'Ctrl+M');
 
-	$('#fitWidthButton').click(function (event) { });
-	$('#zoomInButton').click(function (event) { });
-	$('#zoomOutButton').click(function (event) { });
+	registerButton('#fitWidthButton', null, '');
+	registerButton('#zoomInButton', null, '');
+	registerButton('#zoomOutButton', null, '');
 
-	$('#previousButton').click(function (event) {
+	registerButton('#previousButton', function (event) {
 		if (currentPageNumber > 1) {
 			currentPageNumber--;
 			renderPage(currentPageNumber);
 		}
-	});
-	$('#nextButton').click(function (event) {
+	}, ',', '');
+	registerButton('#nextButton', function (event) {
 		if (currentPageNumber < pdf.pdfInfo.numPages) {
 			currentPageNumber++;
 			renderPage(currentPageNumber);
 		}
-	});
+	}, '.', '');
 
-	$('#facebookButton').click(function (event) { });
-	$('#googlePlusButton').click(function (event) { });
-	$('#twitterButton').click(function (event) { });
-	$('#vkontakteButton').click(function (event) { });
+	registerButton('#facebookButton', null, '');
+	registerButton('#googlePlusButton', null, '');
+	registerButton('#twitterButton', null, '');
+	registerButton('#vkontakteButton', null, '');
 
-	$('#helpButton').click(function (event) { });
-	$('#feedbackButton').click(function (event) { });
-	$('#aboutButton').click(function (event) { });
+	registerButton('#helpButton', null, '');
+	registerButton('#feedbackButton', null, '');
+	registerButton('#aboutButton', null, 'F2');
 }
 
 function getPdfUrl() {
