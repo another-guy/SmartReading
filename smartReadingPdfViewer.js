@@ -1,29 +1,42 @@
 'use strict';
 
+function log(text) { console.log('SmartReading: ' + text); }
+
 function initializeSemanticUi() {
-	console.log('SmartReading: initializeSemanticUi()');
+	console.log('initializeSemanticUi()');
 	
 	$('.ui.dropdown').dropdown();
 }
 
+function initializeMenu() {
+	$('#wordOrPhraseButton').click(function (event) { });
+	$('#grammarExampleButton').click(function (event) { });
+	$('#quoteButton').click(function (event) { });
+	$('#notaBeneButton').click(function (event) { });
+	$('#commentButton').click(function (event) { });
+	$('#helpButton').click(function (event) { });
+	$('#aboutButton').click(function (event) { });
+	$('#closeButton').click(function (event) { });
+}
+
 function getPdfUrl() {
-	console.log('SmartReading: getPdfUrl()');
+	log('getPdfUrl()');
 	
 	var pdfUrl = decodeURIComponent(location.href.split('/smartReadingPdfViewer.html?file=')[1]);
-	console.log('Detected PDF url: ' + pdfUrl);
+	log('Detected PDF url "' + pdfUrl + '"');
 	return pdfUrl;
 }
 function setTitleFromUrl(url) {
-	console.log('SmartReading: setTitleFromUrl()');
+	log('setTitleFromUrl()');
 	
 	var parts = url.split('/');
-	var newTitle = "Reading " + parts[parts.length - 1];
-	console.log('Set title: ' + newTitle);
+	var newTitle = "SmartReading " + parts[parts.length - 1];
+	log('Set title "' + newTitle + '"');
 	document.title = newTitle;
 }
 
 function loadAndRenderPdf(pdfUrl) {
-	console.log('SmartReading: loadAndRenderPdf()');
+	log('loadAndRenderPdf()');
 
 	var canvas = document.getElementById('pdfViewerCanvas');
 	var context = canvas.getContext('2d');
@@ -32,9 +45,8 @@ function loadAndRenderPdf(pdfUrl) {
 	PDFJS.getDocument(pdfUrl).then(function(pdf) {
 	  // Using promise to fetch the page
 	  pdf.getPage(1).then(function(page) {
-		var scale = 1.5;
+		var scale = page.getViewport(1.0).width / canvas.width;
 		var viewport = page.getViewport(scale);
-		//var viewport = page.getViewport(canvas.width / page.getViewport(1.0).width);
 
 		canvas.height = viewport.height;
 		canvas.width = viewport.width;
@@ -49,9 +61,10 @@ function loadAndRenderPdf(pdfUrl) {
 }
 
 $(function() {
-	console.log('SmartReading: Page loaded...');
+	log('Page loaded...');
 	
 	initializeSemanticUi();
+	initializeMenu();
 	
 	var pdfUrl = getPdfUrl();
 	setTitleFromUrl(pdfUrl);

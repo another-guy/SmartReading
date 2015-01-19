@@ -13,25 +13,41 @@
 		<link rel="stylesheet" type="text/css" href="lib/semantic.css">
 		<script src="lib/semantic.js"></script>
 		
+		<!-- Extension script -->
 		<script src="smartReadingPdfViewer.js"></script>
+		
+		<style>
+		#menu {
+			position: fixed;
+			z-index: 100;
+			top: 5px;
+			width: 99%;
+			left: 50%;
+			transform: translate(-50%, 0);
+		}
+		#pdfViewerContainer {
+			position: relative;
+			top: 35px;
+		}
+		</style>
 	</head>
 	<body style="padding: 10px 7px 5px 7px; background-color: #eee;">
 
-		<div class="ui menu" style="margin-bottom: 5px;">
+		<div id="menu" class="ui menu">
 		  <div class="menu">
 			<div class="ui dropdown item">
 				Language tools <i class="icon dropdown"></i>
 				<div class="menu">
-					<a class="item"><i class="file word outline icon"></i> Word or Phrase</a>
-					<a class="item"><i class="file text outline icon"></i> Grammar example</a>
+					<a id="wordOrPhraseButton" class="item"><i class="file word outline icon"></i> Word or Phrase</a>
+					<a id="grammarExampleButton" class="item"><i class="file text outline icon"></i> Grammar example</a>
 				</div>
 			</div>
 			<div class="ui dropdown item">
 				Reader tools <i class="icon dropdown"></i>
 				<div class="menu">
-					<a class="item"><i class="quote right icon"></i> Quote</a>
-					<a class="item"><i class="warning icon"></i> Nota bene</a>
-					<a class="item"><i class="comment outline icon"></i> Comment</a>
+					<a id="quoteButton" class="item"><i class="quote right icon"></i> Quote</a>
+					<a id="notaBeneButton" class="item"><i class="warning icon"></i> Nota bene</a>
+					<a id="commentButton" class="item"><i class="comment outline icon"></i> Comment</a>
 				</div>
 			</div>
 
@@ -39,17 +55,17 @@
 			  <div class="ui dropdown item">
 				More <i class="icon dropdown"></i>
 				<div class="menu">
-				  <a class="item"><i class="help icon"></i> Help</a>
-				  <a class="item"><i class="about icon"></i> About</a>
+				  <a id="helpButton" class="item"><i class="help icon"></i> Help</a>
+				  <a id="aboutButton" class="item"><i class="about icon"></i> About</a>
 				</div>
 			  </div>
-			  <a class="red item"><i class="close icon"></i> Close</a>
+			  <a id="closeButton" class="red item"><i class="close icon"></i> Close</a>
 			</div>
 		  </div>
 		</div>
 	
 		<div id="pdfViewerContainer">
-			<canvas id="pdfViewerCanvas">An old nice &lt;div&gt; for PDF...</canvas>
+			<canvas id="pdfViewerCanvas" />
 		</div>
 	</body>
 </html>
