@@ -9,21 +9,39 @@ function log(text) { console.log('SmartReading: ' + text); }
 
 function initializeSemanticUi() {
 	console.log('initializeSemanticUi()');
-	
 	$('.ui.dropdown').dropdown();
 }
 
 function wordOrPhraseHandler() {
-	log('wordOrPhraseHandler');
+	log('wordOrPhraseHandler()');
 }
 function grammarExampleHandler() {
-	log('grammarExampleHandler');
+	log('grammarExampleHandler()');
+}
+function previousPageHandler() {
+	log('previousPageHandler()');
+	if (currentPageNumber > 1) {
+		currentPageNumber--;
+		renderPage(currentPageNumber);
+	}
+}
+function nextPageHandler() {
+	log('nextPageHandler()');
+	if (currentPageNumber < pdf.pdfInfo.numPages) {
+		currentPageNumber++;
+		renderPage(currentPageNumber);
+	}
 }
 
 function registerButton(buttonSelector, handler, hotkey, hotkeyTextOverride) {
-	$(buttonSelector).click(handler);
+	if (handler != null) {
+		$(buttonSelector).click(handler);
+	}
+
 	if (hotkey !== '') {
-		$(document).bind('keydown', hotkey, handler);
+		if (handler != null) {
+			$(document).bind('keydown', hotkey, handler);
+		}
 		
 		var hotkeyToShow = hotkey;
 		if (typeof hotkeyTextOverride != 'undefined') {
@@ -38,26 +56,16 @@ function initializeMenu() {
 	registerButton('#wordOrPhraseButton', wordOrPhraseHandler, 'Ctrl+A');
 	registerButton('#grammarExampleButton', grammarExampleHandler, 'Ctrl+G');
 
-	registerButton('#quoteButton', wordOrPhraseHandler, 'Ctrl+Q');
-	registerButton('#notaBeneButton', wordOrPhraseHandler, 'Ctrl+N');
-	registerButton('#commentButton', wordOrPhraseHandler, 'Ctrl+M');
+	registerButton('#quoteButton', null, 'Ctrl+Q');
+	registerButton('#notaBeneButton', null, 'Ctrl+N');
+	registerButton('#commentButton', null, 'Ctrl+M');
 
 	registerButton('#fitWidthButton', null, '');
 	registerButton('#zoomInButton', null, '');
 	registerButton('#zoomOutButton', null, '');
 
-	registerButton('#previousButton', function (event) {
-		if (currentPageNumber > 1) {
-			currentPageNumber--;
-			renderPage(currentPageNumber);
-		}
-	}, ',', '');
-	registerButton('#nextButton', function (event) {
-		if (currentPageNumber < pdf.pdfInfo.numPages) {
-			currentPageNumber++;
-			renderPage(currentPageNumber);
-		}
-	}, '.', '');
+	registerButton('#previousButton', previousPageHandler, ',', '');
+	registerButton('#nextButton', nextPageHandler, '.', '');
 
 	registerButton('#facebookButton', null, '');
 	registerButton('#googlePlusButton', null, '');
