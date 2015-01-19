@@ -38,10 +38,14 @@ function initializeMenu() {
 		}
 	});
 
+	$('#facebookButton').click(function (event) { });
+	$('#googlePlusButton').click(function (event) { });
+	$('#twitterButton').click(function (event) { });
+	$('#vkontakteButton').click(function (event) { });
+
 	$('#helpButton').click(function (event) { });
 	$('#feedbackButton').click(function (event) { });
 	$('#aboutButton').click(function (event) { });
-	$('#closeButton').click(function (event) { });
 }
 
 function getPdfUrl() {
@@ -74,11 +78,19 @@ function loadAndRenderPdf(pdfUrl) {
 }
 
 // EXAMPLE FROM http://mozilla.github.io/pdf.js/examples/learning/prevnext.html
+
+var initialCanvasWidth = 0;
 function renderPage(pageNumber) {
 	pdf.getPage(pageNumber).then(function(page) {
 		$('#pageDiv').text('Page ' + pageNumber + ' of ' + pdf.pdfInfo.numPages);
-	
-		var scale = page.getViewport(1.0).width / canvas.width;
+
+		if (initialCanvasWidth <= 0) {
+			initialCanvasWidth = canvas.width;
+		}
+
+		var scale = page.getViewport(1.0).width / initialCanvasWidth;
+		log('scale = ' + page.getViewport(1.0).width + ' (viewportWidth) / ' + initialCanvasWidth + ' (initialCanvasWidth) = ' + scale);
+
 		var viewport = page.getViewport(scale);
 
 		canvas.height = viewport.height;

@@ -2,6 +2,8 @@ BUGS
 [ ] Not all the docs correctly fit to width on load
 
 TODO
+[ ] Text selection/copy
+[ ] Implement rendering page queue
 [ ] Remember last read page
 [ ] Hot keys
 [ ] +/-, page ABC/XYZ, < >
@@ -11,8 +13,8 @@ TODO
 [?] Simple access to default PDF viewer
 
 IN PROGRESS
-[ ] Menu
 
 DONE
 [V] Local PDF rendering
 [V] Remote PDF rendering
+[V] Menu
