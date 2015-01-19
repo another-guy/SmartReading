@@ -1,7 +1,17 @@
-[ ] Local PDF rendering
-[ ] Remote PDF rendering
+BUGS
+[ ] Not all the docs correctly fit to width on load
+
+TODO
+[ ] Hot keys
+[ ] +/-, page ABC/XYZ, < >
 [ ] Sending REST requests to the Service
-[ ] Menu
 [ ] Add a separate page for used JS libraries
 [?] Text-to-speech
 [?] Simple access to default PDF viewer
+
+IN PROGRESS
+[ ] Menu
+
+DONE
+[V] Local PDF rendering
+[V] Remote PDF rendering
