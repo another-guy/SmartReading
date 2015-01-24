@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6daa38bc-e4c5-4be0-a589-b1b67015bf60" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smartReadingPdfViewer.html" afterPath="$PROJECT_DIR$/smartReadingPdfViewer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smartReadingPdfViewer.js" afterPath="$PROJECT_DIR$/smartReadingPdfViewer.js" />
-    </list>
+    <list default="true" id="6daa38bc-e4c5-4be0-a589-b1b67015bf60" name="Default" comment="" />
     <ignored path="book_summary.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
