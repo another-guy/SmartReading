@@ -133,9 +133,17 @@ function renderPage(pageNumber) {
     };
     var renderTask = page.render(renderContext);
 
-    var textLayerDiv = $('#textLayerDiv');
+
+    var pdfContainerDiv = $('#pdfViewerContainer');
+    // Remove old textLayerDiv and append a brand new one.
+    pdfContainerDiv.children("div").remove();
+    var textLayerDiv = $('<div id="textLayerDiv"></div>');
+    pdfContainerDiv.append(textLayerDiv);
+
+    textLayerDiv.addClass('textLayer');
     textLayerDiv.width(canvas.width);
     textLayerDiv.height(canvas.height);
+
     var textLayerPromise = page.getTextContent().then(function (textContent) {
       var textLayerBuilder = new TextLayerBuilder({
         textLayerDiv: textLayerDiv.get(0),
